@@ -6,7 +6,7 @@
 # no clone, no setup.py, no manual pip, and no Python-version juggling:
 #
 #   "command": "uvx",
-#   "args": ["--from", "git+https://github.com/brettscharm/elm-mcp", "elm-mcp"]
+#   "args": ["--from", "git+https://github.com/eclectice/elm-mcp", "elm-mcp"]
 #
 # `uvx` (from Astral's `uv`) reads the metadata below, provisions a Python that
 # satisfies `requires-python` (downloading one if the machine has none / only an
@@ -51,15 +51,15 @@ dependencies = [
 
 [project.optional-dependencies]
 # Local semantic search (find_similar_requirements). ONNX-based, ~50 MB, fully
-# local. Opt in with: uvx --from "git+https://github.com/brettscharm/elm-mcp[semantic]" elm-mcp
+# local. Opt in with: uvx --from "git+https://github.com/eclectice/elm-mcp[semantic]" elm-mcp
 semantic = ["fastembed>=0.3.0"]
 
 [project.scripts]
 elm-mcp = "doors_mcp_server:cli"
 
 [project.urls]
-Homepage = "https://github.com/brettscharm/elm-mcp"
-Issues = "https://github.com/brettscharm/elm-mcp/issues"
+Homepage = "https://github.com/eclectice/elm-mcp"
+Issues = "https://github.com/eclectice/elm-mcp/issues"
 
 [tool.hatch.version]
 path = "doors_mcp_server.py"                # single source of truth: __version__ = "..."

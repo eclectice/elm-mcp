@@ -146,7 +146,7 @@ If the user wants verified-live URLs (e.g., before sharing with a customer), pas
 get_elm_docs_links(topic="upgrade", verify_live=true)
 ```
 
-Dead links in the curated set should be reported as GitHub issues at https://github.com/brettscharm/elm-mcp/issues — the table updates with each release.
+Dead links in the curated set should be reported as GitHub issues at https://github.com/eclectice/elm-mcp/issues — the table updates with each release.
 
 ---
 

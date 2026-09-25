@@ -28,7 +28,7 @@ If you don't have an ELM environment, ask your admin for a sandbox project, or u
 Open Terminal, paste, Enter:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/brettscharm/elm-mcp/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/eclectice/elm-mcp/main/install.sh | bash
 ```
 
 That single command puts elm-mcp on your machine, installs dependencies, prompts for your ELM URL / username / password, writes Bob's config, and installs the 5 custom modes. When it finishes, go to **Step 2**.
@@ -37,7 +37,7 @@ That single command puts elm-mcp on your machine, installs dependencies, prompts
 
 No terminal commands — download, extract, paste one block into Bob.
 
-1. **Download** — [github.com/brettscharm/elm-mcp](https://github.com/brettscharm/elm-mcp) → green **Code** button → **Download ZIP**.
+1. **Download** — [github.com/eclectice/elm-mcp](https://github.com/eclectice/elm-mcp) → green **Code** button → **Download ZIP**.
 2. **Extract** — right-click the ZIP → **Extract All**. Note the folder it creates, e.g. `C:\Users\YOU\Downloads\elm-mcp-main`. **Keep it** — Bob runs the server from here.
 3. **Paste into Bob** — Bob → settings/gear icon → **MCP** tab → **Edit Global MCP**. Paste the block below, then edit **two things**: the path on the `args` line (match your folder from step 2) and your ELM details at the bottom.
    ```json
@@ -120,7 +120,7 @@ Don't retry the one-liner — use the **3-step Windows path in Step 1** (install
 
 **The one-liner didn't prompt for my password / execution blocked (any OS).** Use the manual path:
 ```bash
-git clone https://github.com/brettscharm/elm-mcp.git ~/.elm-mcp
+git clone https://github.com/eclectice/elm-mcp.git ~/.elm-mcp
 cd ~/.elm-mcp && python3 setup.py      # py setup.py on Windows
 ```
 On Windows without git, download the ZIP instead (Step 1 → Windows → 3 steps) and run `py setup.py` from the extracted folder.
@@ -144,7 +144,7 @@ Or, once connected, ask Bob to **"run a self test"** — it exercises ~20 read p
 
 Any of these get you the latest:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/brettscharm/elm-mcp/main/install.sh | bash   # re-run, idempotent
+curl -fsSL https://raw.githubusercontent.com/eclectice/elm-mcp/main/install.sh | bash   # re-run, idempotent
 # or just ask Bob: "update yourself"
 ```
 

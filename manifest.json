@@ -8,14 +8,14 @@
   "author": {
     "name": "Brett Scharmett",
     "email": "brett.scharmett@ibm.com",
-    "url": "https://github.com/brettscharm"
+    "url": "https://github.com/eclectice"
   },
-  "homepage": "https://github.com/brettscharm/elm-mcp",
-  "documentation": "https://github.com/brettscharm/elm-mcp#readme",
-  "support": "https://github.com/brettscharm/elm-mcp/issues",
+  "homepage": "https://github.com/eclectice/elm-mcp",
+  "documentation": "https://github.com/eclectice/elm-mcp#readme",
+  "support": "https://github.com/eclectice/elm-mcp/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/brettscharm/elm-mcp"
+    "url": "https://github.com/eclectice/elm-mcp"
   },
   "license": "MIT",
   "keywords": [

@@ -365,12 +365,12 @@ If the user says "connect to ELM" and the `doors-next` MCP server is NOT availab
 >
 > **🍎 On Mac/Linux** — one command in Terminal:
 > ```
-> curl -fsSL https://raw.githubusercontent.com/brettscharm/elm-mcp/main/install.sh | bash
+> curl -fsSL https://raw.githubusercontent.com/eclectice/elm-mcp/main/install.sh | bash
 > ```
 > It downloads everything, asks for your ELM URL / username / password, configures me, and installs the 5 custom modes.
 >
 > **🪟 On Windows** — download + paste, no terminal:
-> 1. Go to https://github.com/brettscharm/elm-mcp → green **Code** button → **Download ZIP**, then right-click → **Extract All** (note the folder, e.g. `C:\Users\YOU\Downloads\elm-mcp-main`).
+> 1. Go to https://github.com/eclectice/elm-mcp → green **Code** button → **Download ZIP**, then right-click → **Extract All** (note the folder, e.g. `C:\Users\YOU\Downloads\elm-mcp-main`).
 > 2. In Bob: settings/gear icon → **MCP** tab → **Edit Global MCP**, and paste this — editing the `args` path to match your folder, and your ELM details:
 > ```json
 > {

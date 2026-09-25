@@ -3,7 +3,7 @@
 
   Run this in PowerShell:
 
-    irm https://raw.githubusercontent.com/brettscharm/elm-mcp/main/install.ps1 | iex
+    irm https://raw.githubusercontent.com/eclectice/elm-mcp/main/install.ps1 | iex
 
   It clones the repo to %USERPROFILE%\.elm-mcp, runs setup.py to wire up
   your AI host (IBM Bob, Claude Code, Cursor, VS Code, Windsurf), prompts
@@ -33,7 +33,7 @@
 & {
     $ErrorActionPreference = "Stop"
 
-    $RepoUrl = "https://github.com/brettscharm/elm-mcp.git"
+    $RepoUrl = "https://github.com/eclectice/elm-mcp.git"
     $InstallDir = if ($env:ELM_MCP_DIR) { $env:ELM_MCP_DIR } else { Join-Path $HOME ".elm-mcp" }
 
     function Write-StepLine($msg) { Write-Host "`n$msg" -ForegroundColor White }

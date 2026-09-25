@@ -37,7 +37,7 @@ You need: macOS, Linux, **or Windows**; Python 3.10+ (the MCP SDK needs it — n
 Open Terminal, paste this, press Enter:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/brettscharm/elm-mcp/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/eclectice/elm-mcp/main/install.sh | bash
 ```
 
 That's the whole install. It downloads ELM MCP, asks for your ELM URL / username / password, writes Bob's config, and installs the 5 custom modes. When it finishes, go to **Step 2**.
@@ -48,7 +48,7 @@ That's the whole install. It downloads ELM MCP, asks for your ELM URL / username
 
 No terminal commands needed — just download, extract, and paste one block into Bob.
 
-1. **Download** — go to [github.com/brettscharm/elm-mcp](https://github.com/brettscharm/elm-mcp) → green **Code** button → **Download ZIP**.
+1. **Download** — go to [github.com/eclectice/elm-mcp](https://github.com/eclectice/elm-mcp) → green **Code** button → **Download ZIP**.
 2. **Extract** — right-click the downloaded ZIP → **Extract All**. Note the folder it creates, e.g. `C:\Users\YOU\Downloads\elm-mcp-main`. **Keep it** — Bob runs the server from here.
 3. **Paste into Bob** — open Bob → settings/gear icon → **MCP** tab → **Edit Global MCP**. Paste the block below, then edit **two things**: the path on the `args` line (so it matches your folder from step 2), and your ELM details at the bottom.
    ```json
@@ -75,7 +75,7 @@ No terminal commands needed — just download, extract, and paste one block into
 > **Dependencies just work.** Even if Bob launches the server with a different Python than the installer used (the #1 cause of "missing dependency" failures), the server **self-heals** on first start — it installs its own dependencies into whatever interpreter Bob uses, then restarts. No guessing, no manual `pip install`.
 
 > **No internet one-liner / corporate-locked machine?** Works on every OS:
-> `git clone https://github.com/brettscharm/elm-mcp.git ~/.elm-mcp`, then
+> `git clone https://github.com/eclectice/elm-mcp.git ~/.elm-mcp`, then
 > `cd ~/.elm-mcp` and `python3 setup.py` (use `py setup.py` on Windows).
 > `setup.py` is the cross-platform workhorse — the one-liners above just wrap it.
 
@@ -134,7 +134,7 @@ You don't have to memorize these. Bob figures it out from natural language. If y
 
 **Anything else:**
 - Tell Bob *"run elm_mcp_health"* — it'll dump connection state, version, last update check, etc.
-- Or open an issue: https://github.com/brettscharm/elm-mcp/issues
+- Or open an issue: https://github.com/eclectice/elm-mcp/issues
 
 ---
 
@@ -145,7 +145,7 @@ The simplest way: **say *"update yourself"* in any Bob chat.** That's a single t
 Or in terminal:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/brettscharm/elm-mcp/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/eclectice/elm-mcp/main/install.sh | bash
 ```
 
 (Same command as install — re-running it just updates.)
@@ -218,7 +218,7 @@ Same server works against any MCP-speaking host. `install.sh` writes the right c
 ## Manual install (only if `curl | bash` doesn't fit your security policy)
 
 ```bash
-git clone https://github.com/brettscharm/elm-mcp.git ~/.elm-mcp
+git clone https://github.com/eclectice/elm-mcp.git ~/.elm-mcp
 cd ~/.elm-mcp
 python3 setup.py
 ```
@@ -255,7 +255,7 @@ For air-gapped / locked-down environments where automatic config-write doesn't w
 
 ## Help / issues / contributing
 
-- Issues: https://github.com/brettscharm/elm-mcp/issues
+- Issues: https://github.com/eclectice/elm-mcp/issues
 - Email: brett.scharmett@ibm.com (personal capacity, not IBM support)
 
 PRs welcome. The probes in `probe/` document the live ELM API surface; new tools should follow the patterns in `doors_client.py` (GET-with-ETag → modify → PUT-with-If-Match for updates; service-provider-discovery → POST to creation factory for creates).
@@ -270,10 +270,10 @@ Copy-paste-ready blurb:
 >
 > Install in 30 seconds:
 > ```
-> curl -fsSL https://raw.githubusercontent.com/brettscharm/elm-mcp/main/install.sh | bash
+> curl -fsSL https://raw.githubusercontent.com/eclectice/elm-mcp/main/install.sh | bash
 > ```
 > Restart Bob. Say *"connect to ELM and list my projects."*
 >
-> 84 tools, 15 prompts. Read/write requirements (rich text + tables + images), build full projects end-to-end with traceable code, import Jira epics, see what your team's been up to. Full details: https://github.com/brettscharm/elm-mcp
+> 84 tools, 15 prompts. Read/write requirements (rich text + tables + images), build full projects end-to-end with traceable code, import Jira epics, see what your team's been up to. Full details: https://github.com/eclectice/elm-mcp
 >
 > ⚠️ Personal passion project — NOT an official IBM tool.

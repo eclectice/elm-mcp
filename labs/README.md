@@ -72,8 +72,8 @@ Works on **macOS, Linux, and Windows** (Lab 1 covers all three).
 
 ## Need help?
 
-- **Repo:** https://github.com/brettscharm/elm-mcp
-- **Issues:** https://github.com/brettscharm/elm-mcp/issues
+- **Repo:** https://github.com/eclectice/elm-mcp
+- **Issues:** https://github.com/eclectice/elm-mcp/issues
 - **Health / self-test:** ask Bob to *"run a self test"* anytime — it exercises ~20 read paths and returns a green/red scorecard
 
 ---

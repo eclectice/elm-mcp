@@ -4,7 +4,7 @@
 #
 # Run this from any terminal:
 #
-#   curl -fsSL https://raw.githubusercontent.com/brettscharm/elm-mcp/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/eclectice/elm-mcp/main/install.sh | bash
 #
 # It clones the repo to a stable location, runs setup.py to wire up your
 # AI host (IBM Bob, Claude Code, Cursor, VS Code, Windsurf), and prompts
@@ -16,7 +16,7 @@
 
 set -euo pipefail
 
-REPO_URL="https://github.com/brettscharm/elm-mcp.git"
+REPO_URL="https://github.com/eclectice/elm-mcp.git"
 INSTALL_DIR="${ELM_MCP_DIR:-$HOME/.elm-mcp}"
 
 # ── Pretty output ────────────────────────────────────────────

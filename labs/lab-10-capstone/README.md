@@ -115,6 +115,6 @@ That's the full surface of elm-mcp — driven entirely by natural language, with
 - **Use it on real work.** Point Bob at your actual projects.
 - **Run a self-test** anytime to confirm everything's healthy: *"run a self test."*
 - **Keep it updated:** *"update yourself"* pulls the latest.
-- **Found a rough edge?** File it: https://github.com/brettscharm/elm-mcp/issues
+- **Found a rough edge?** File it: https://github.com/eclectice/elm-mcp/issues
 
 🎉 You've completed the elm-mcp lab series.

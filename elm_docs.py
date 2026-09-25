@@ -701,7 +701,7 @@ _LINKS: List[Dict[str, str]] = [
     {
         "topic": "elm-mcp",
         "display": "elm-mcp GitHub repository",
-        "url": "https://github.com/brettscharm/elm-mcp",
+        "url": "https://github.com/eclectice/elm-mcp",
         "version": "*",
         "product": "ELM",
         "notes": "This MCP server's source code, issues, and releases.",

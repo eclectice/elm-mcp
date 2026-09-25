@@ -10684,7 +10684,7 @@ async def _dispatch_tool(name: str, arguments: Any) -> list[TextContent]:
                 "_Tip: pass `verify_live=true` to HEAD-check links before "
                 "returning. If you find a dead link in this curated set, "
                 "file an issue at "
-                "https://github.com/brettscharm/elm-mcp/issues — the "
+                "https://github.com/eclectice/elm-mcp/issues — the "
                 "URL table updates with each release._"
             )
 
