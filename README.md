@@ -256,7 +256,6 @@ For air-gapped / locked-down environments where automatic config-write doesn't w
 ## Help / issues / contributing
 
 - Issues: https://github.com/eclectice/elm-mcp/issues
-- Email: brett.scharmett@ibm.com (personal capacity, not IBM support)
 
 PRs welcome. The probes in `probe/` document the live ELM API surface; new tools should follow the patterns in `doors_client.py` (GET-with-ETag → modify → PUT-with-If-Match for updates; service-provider-discovery → POST to creation factory for creates).
 
