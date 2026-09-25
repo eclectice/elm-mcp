@@ -98,3 +98,9 @@ archive_*/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# Local backups and sensitive scratch files
+Backups/
+backups/
+*.bak
+*.backup

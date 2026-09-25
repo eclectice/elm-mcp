@@ -48,6 +48,7 @@ import os
 import sys
 import logging
 import asyncio
+import time
 from typing import Any, Optional, List, Dict
 
 
@@ -155,6 +156,33 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger("elm-mcp")
+
+_credential_values = set()
+
+
+def _register_credential(value):
+    """Track non-empty credential values for log and error redaction."""
+    if value:
+        _credential_values.add(str(value))
+
+
+def _redact_credentials(value):
+    """Remove configured credential values from diagnostic text."""
+    text = str(value)
+    for secret in sorted(_credential_values, key=len, reverse=True):
+        if secret:
+            text = text.replace(secret, "[REDACTED]")
+    return text
+
+
+class _CredentialRedactionFilter(logging.Filter):
+    def filter(self, record):
+        record.msg = _redact_credentials(record.getMessage())
+        record.args = ()
+        return True
+
+
+logger.addFilter(_CredentialRedactionFilter())
 from mcp.server import Server
 from mcp.types import (
     Tool, ToolAnnotations, TextContent,
@@ -171,13 +199,15 @@ from doors_client import DOORSNextClient
 # Atlassian's hosted MCP server.
 
 load_dotenv()
+_register_credential(os.getenv("ELM_USERNAME") or os.getenv("DOORS_USERNAME"))
+_register_credential(os.getenv("ELM_PASSWORD") or os.getenv("DOORS_PASSWORD"))
 
 # Bumped on each release. The auto-update logic below uses this to
 # decide if a newer GitHub release exists; the `connect_to_elm`
 # response also surfaces it so users always know what version they're
 # running.
 __version__ = "0.32.0"
-GITHUB_REPO = "brettscharm/elm-mcp"
+GITHUB_REPO = "eclectice/elm-mcp"
 
 # Server-level instructions — surfaced to the AI host through the MCP protocol
 # itself (the `instructions` field of the initialize result). Unlike BOB.md
@@ -190,8 +220,9 @@ One login spans five domains: DNG (DOORS Next — requirements & modules), EWM \
 (work items: tasks, stories, defects), ETM (test plans/cases/results), GCM \
 (global configurations), and SCM (change-sets & code reviews).
 
-Getting started: call `connect_to_elm` first (or it auto-connects from the \
-ELM_URL / ELM_USERNAME / ELM_PASSWORD environment variables). `list_capabilities` \
+Getting started: call `connect_to_elm` first (it can use the host-injected \
+ELM_URL / ELM_USERNAME / ELM_PASSWORD environment variables without passing \
+credentials in tool arguments). `list_capabilities` \
 returns the full menu of tools grouped by task.
 
 Routing — pick the right tool instead of guessing:
@@ -998,7 +1029,7 @@ def _get_or_create_client() -> Optional[DOORSNextClient]:
         _client_error = ""
         return _client
 
-    _client_error = auth_result['error']
+    _client_error = _redact_credentials(auth_result['error'])
     logger.warning("Auto-connect from .env failed: %s", _client_error)
     return None
 
@@ -3835,7 +3866,9 @@ async def list_tools() -> list[Tool]:
                 "The URL can be the base server URL (e.g., https://server.com) "
                 "or the DNG URL ending in /rm — both work. "
                 "This single connection is used for ALL tools (DNG, EWM, and ETM). "
-                "Must be called before any other tool."
+                "When called without arguments, uses ELM_URL, ELM_USERNAME, and "
+                "ELM_PASSWORD supplied by the MCP host. Prefer this mode so "
+                "credentials are not sent in tool arguments."
             ),
             inputSchema={
                 "type": "object",
@@ -3853,7 +3886,7 @@ async def list_tools() -> list[Tool]:
                         "description": "ELM password"
                     }
                 },
-                "required": ["url", "username", "password"]
+                "required": []
             }
         ),
         Tool(
@@ -6134,7 +6167,24 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
     `_dispatch_tool`), then auto-logs the call into BOB Team Actions
     if it's a milestone-worthy event AND the user has team-actions
     enabled."""
-    result = await _dispatch_tool(name, arguments)
+    started_at = time.perf_counter()
+    try:
+        result = await _dispatch_tool(name, arguments)
+    except Exception:
+        elapsed_ms = (time.perf_counter() - started_at) * 1000.0
+        logger.error(
+            "Tool failed: %s duration_ms=%.1f",
+            name,
+            elapsed_ms,
+        )
+        raise
+
+    elapsed_ms = (time.perf_counter() - started_at) * 1000.0
+    logger.info(
+        "Tool completed: %s duration_ms=%.1f",
+        name,
+        elapsed_ms,
+    )
 
     # Auto-log into BOB Team Actions (best-effort, never raises)
     try:
@@ -6188,19 +6238,27 @@ async def _dispatch_tool(name: str, arguments: Any) -> list[TextContent]:
     try:
         # ── connect_to_elm ────────────────────────────────────
         if name == "connect_to_elm":
-            url = arguments.get("url", "").strip().rstrip('/')
-            username = arguments.get("username", "").strip()
-            password = arguments.get("password", "").strip()
+            url = (arguments.get("url") or
+                   os.getenv("ELM_URL") or
+                   os.getenv("DOORS_URL") or "").strip().rstrip('/')
+            username = (arguments.get("username") or
+                        os.getenv("ELM_USERNAME") or
+                        os.getenv("DOORS_USERNAME") or "").strip()
+            password = (arguments.get("password") or
+                        os.getenv("ELM_PASSWORD") or
+                        os.getenv("DOORS_PASSWORD") or "").strip()
 
             if not all([url, username, password]):
                 return [TextContent(type="text", text="Error: url, username, and password are all required.")]
 
+            _register_credential(username)
+            _register_credential(password)
             # Pass the URL as-is — the client normalizes it and sets up all endpoints
             client = DOORSNextClient(url, username, password)
             auth_result = client.authenticate()
             if not auth_result['success']:
                 return [TextContent(type="text", text=(
-                    f"Failed to connect: {auth_result['error']}\n\n"
+                    f"Failed to connect: {_redact_credentials(auth_result['error'])}\n\n"
                     "Please check:\n"
                     "- URL is correct (e.g., https://your-server.com)\n"
                     "- Username and password are correct\n"
@@ -11429,14 +11487,14 @@ async def _dispatch_tool(name: str, arguments: Any) -> list[TextContent]:
         elif name == "elm_mcp_health":
             import datetime as _dt
             now = _dt.datetime.utcnow().isoformat() + "Z"
+            if _client is None and not _client_error:
+                _get_or_create_client()
             # Connection state
             conn_state = "not connected"
             elm_url = ""
-            elm_user = ""
             if _client:
                 conn_state = "connected"
                 elm_url = getattr(_client, 'base_url', '') or getattr(_client, 'url', '')
-                elm_user = getattr(_client, 'username', '')
             elif _client_error:
                 conn_state = f"error: {_client_error}"
 
@@ -11482,7 +11540,7 @@ async def _dispatch_tool(name: str, arguments: Any) -> list[TextContent]:
                 f"## Connection\n"
                 f"- **State:** {conn_state}\n"
                 f"- **ELM URL:** {elm_url or '_(none)_'}\n"
-                f"- **User:** {elm_user or '_(none)_'}\n\n"
+                f"- **Credentials:** not displayed\n\n"
                 f"## Updates\n"
                 f"- **Auto-update enabled:** {auto_update_enabled}\n"
                 f"- **Last check:** {update_check}\n"
