@@ -34,6 +34,7 @@ readme = "README.md"
 requires-python = ">=3.10"                  # the MCP SDK has no build for < 3.10
 license = { text = "MIT" }
 authors = [{ name = "Brett Scharmett" }]
+maintainers = [{ name = "eclectice" }]
 keywords = ["ibm", "elm", "doors-next", "dng", "ewm", "etm", "oslc", "requirements", "mcp"]
 
 # Mirrors requirements.txt. Keep the two in sync (requirements.txt stays for the

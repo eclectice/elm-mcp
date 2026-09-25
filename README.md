@@ -6,7 +6,7 @@
 > *"Bob, import this Jira epic PDF into DNG."*
 > *"Bob, what's the team been doing this week?"*
 
-> ⚠️ Personal passion project. **NOT** an official IBM tool. Use at your own risk. IBM, DOORS Next, ELM, EWM, ETM are trademarks of IBM Corp.
+> ⚠️ Personal passion project originally created and architected by **Brett Scharmett**, maintained as an active fork by **eclectice**. **NOT** an official IBM tool. Use at your own risk. IBM, DOORS Next, ELM, EWM, ETM are trademarks of IBM Corp.
 
 ---
 
@@ -255,7 +255,9 @@ For air-gapped / locked-down environments where automatic config-write doesn't w
 
 ## Help / issues / contributing
 
-- Issues: https://github.com/eclectice/elm-mcp/issues
+- **Original Creator & Author:** Brett Scharmett
+- **Fork Maintainer:** eclectice
+- **Issues & Contributions:** https://github.com/eclectice/elm-mcp/issues
 
 PRs welcome. The probes in `probe/` document the live ELM API surface; new tools should follow the patterns in `doors_client.py` (GET-with-ETag → modify → PUT-with-If-Match for updates; service-provider-discovery → POST to creation factory for creates).
 
