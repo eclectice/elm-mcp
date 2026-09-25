@@ -6,7 +6,10 @@
 > *"Bob, import this Jira epic PDF into DNG."*
 > *"Bob, what's the team been doing this week?"*
 
-> ⚠️ Personal passion project originally created and architected by **Brett Scharmett**, maintained as an active fork by **eclectice**. **NOT** an official IBM tool. Use at your own risk. IBM, DOORS Next, ELM, EWM, ETM are trademarks of IBM Corp.
+> ℹ️ **Attribution & Community Maintenance Notice:**  
+> This project was originally created, architected, and authored by **Brett Scharmett** under the MIT License.  
+> Following the privatization/removal of the original upstream repository, this repository is maintained as an active public fork and mirror by **eclectice** to ensure continuous availability, bugfixes, and security enhancements for the community and engineering teams. All original authorship, design, and architecture are fully attributed to Brett Scharmett.  
+> ⚠️ Personal passion project — **NOT** an official IBM tool. Use at your own risk. IBM, DOORS Next, ELM, EWM, ETM are trademarks of IBM Corp.
 
 ---
 
